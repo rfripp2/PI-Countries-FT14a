@@ -5,11 +5,10 @@ const { DataTypes } = require("sequelize");
 module.exports = (sequelize) => {
   // defino el modelo
   sequelize.define("activity", {
-    ID: {
+    /*  ID: {
       type: DataTypes.UUID,
       primaryKey: true,
-      allowNull: false,
-    },
+    }, */
     name: {
       type: DataTypes.STRING,
       allowNull: false,

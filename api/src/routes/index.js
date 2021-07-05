@@ -10,6 +10,6 @@ const router = Router();
 // Ejemplo: router.use('/auth', authRouter);
 
 router.use("/countries", CountriesRoutes);
-//router.use("/activity", ActivityRoutes);
+router.use("/activity", ActivityRoutes);
 
 module.exports = router;
