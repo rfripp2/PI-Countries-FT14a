@@ -1,35 +1,56 @@
 const { Router } = require("express");
-const { Country } = require("../db");
-const axios = require("axios").default;
-/* const addCountries = require("../controllers/countries"); */
+const { Country, Activity } = require("../db");
+const Sequelize = require("sequelize");
+const Op = Sequelize.Op;
+
 const router = Router();
-router.get("/", async (req, res) => {
-  let countryList;
-  return axios
-    .get("https://restcountries.eu/rest/v2/all")
-    .then((response) => {
-      countryList = response.data.map((x) => {
-        return {
-          ID: x.alpha3Code,
-          name: x.name,
-          continent: x.region,
-          capital: x.capital,
-          subregion: x.subregion,
-          area: x.area,
-          population: x.population,
-          flag: x.flag,
-        };
-      });
-      return countryList;
-    })
-    .then((countryList) => {
-      Country.bulkCreate(countryList);
-      return Country.findAll({
-        attributes: ["flag", "name", "continent"],
-        limit: 10,
-      });
-    })
-    .then((result) => res.json(result));
+
+router.get("/", (req, res) => {
+  const { name } = req.query;
+  if (!name) {
+    return Country.findAll({
+      attributes: ["flag", "name", "continent"],
+      limit: 10,
+    }).then((countries) => {
+      return res.json(countries);
+    });
+  }
+
+  return Country.findAll({
+    attributes: ["flag", "name", "continent"],
+    where: {
+      name: {
+        [Op.iLike]: `%${name}%`,
+      },
+    },
+  }).then((countries) => {
+    return countries.length > 1
+      ? res.json(countries)
+      : res.send("No Countries found");
+  });
+});
+
+router.get("/:id", (req, res) => {
+  const { id } = req.params;
+
+  Country.findOne({
+    attributes: [
+      "ID",
+      "name",
+      "continent",
+      "capital",
+      "subregion",
+      "area",
+      "population",
+      "flag",
+    ],
+    include: Activity,
+    where: {
+      ID: id.toUpperCase(),
+    },
+  }).then((country) => {
+    return res.json(country);
+  });
 });
 
 module.exports = router;

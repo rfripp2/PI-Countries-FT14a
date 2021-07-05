@@ -1,6 +1,7 @@
 require("dotenv").config();
 const { Sequelize } = require("sequelize");
 const fs = require("fs");
+const axios = require("axios").default;
 const path = require("path");
 const { DB_USER, DB_PASSWORD, DB_HOST } = process.env;
 
@@ -34,6 +35,32 @@ let capsEntries = entries.map((entry) => [
   entry[1],
 ]);
 sequelize.models = Object.fromEntries(capsEntries);
+
+function createCountries() {
+  let countryList;
+  return axios
+    .get("https://restcountries.eu/rest/v2/all")
+    .then((response) => {
+      countryList = response.data.map((x) => {
+        return {
+          ID: x.alpha3Code,
+          name: x.name,
+          continent: x.region,
+          capital: x.capital,
+          subregion: x.subregion,
+          area: x.area,
+          population: x.population,
+          flag: x.flag,
+        };
+      });
+      return countryList;
+    })
+    .then((countryList) => {
+      return Country.bulkCreate(countryList);
+    });
+}
+
+createCountries();
 
 // En sequelize.models están todos los modelos importados como propiedades
 // Para relacionarlos hacemos un destructuring
