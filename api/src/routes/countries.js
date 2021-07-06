@@ -7,6 +7,8 @@ const router = Router();
 
 router.get("/", (req, res) => {
   const { name } = req.query;
+
+  // If no name as query
   if (!name) {
     return Country.findAll({
       attributes: ["flag", "name", "continent"],
@@ -30,6 +32,20 @@ router.get("/", (req, res) => {
   });
 });
 
+router.post("/", (req, res) => {
+  const { continents, activities, orderBy, order, page } = req.body;
+
+  Country.findAll({
+    attributes: ["flag", "name", "continent"],
+    where: {
+      continent: continents,
+    },
+    order: [[orderBy, order]],
+    limit: 10,
+    offset: page * 10,
+  }).then((countries) => res.json(countries));
+});
+
 router.get("/:id", (req, res) => {
   const { id } = req.params;
 
@@ -49,7 +65,7 @@ router.get("/:id", (req, res) => {
       ID: id.toUpperCase(),
     },
   }).then((country) => {
-    return res.json(country);
+    return country ? res.json(country) : res.sendStatus(404);
   });
 });
 
