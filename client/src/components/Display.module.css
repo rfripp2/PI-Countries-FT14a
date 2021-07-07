@@ -1,0 +1,14 @@
+.flex {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.padding {
+  padding-right: 500px;
+  margin-right: 500px;
+}
+
+.background {
+  background-color: red;
+}

@@ -11,7 +11,7 @@ router.get("/", (req, res) => {
   // If no name as query
   if (!name) {
     return Country.findAll({
-      attributes: ["flag", "name", "continent"],
+      attributes: ["flag", "name", "continent", "ID"],
       limit: 10,
     }).then((countries) => {
       return res.json(countries);
@@ -26,7 +26,7 @@ router.get("/", (req, res) => {
       },
     },
   }).then((countries) => {
-    return countries.length > 1
+    return countries.length > 0
       ? res.json(countries)
       : res.send("No Countries found");
   });
