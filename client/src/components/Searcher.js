@@ -11,7 +11,6 @@ export function Searcher(props) {
   function handleSubmit(e) {
     e.preventDefault();
     setCountry("");
-    console.log(props);
     props.getSearchedCountries(country);
   }
   return (
