@@ -2,6 +2,7 @@ import axios from "axios";
 export const GET_INITIAL_COUNTRIES = "GET_INITIAL_COUNTRIES";
 export const GET_SEARCHED_COUNTRIES = "GET_SEARCHED_COUNTRIES";
 export const FILTERED_COUNTRIES = "FILTERED_COUNTRIES";
+export const POST_ACTIVITY = "POST_ACTIVITY";
 export function getInitialCountries() {
   return function (dispatch) {
     axios.get("http://localhost:3001/countries/").then((countries) => {
@@ -28,6 +29,17 @@ export function filteredCountries(continent, orderBy, order, page) {
       )
       .then((countries) => {
         dispatch({ type: FILTERED_COUNTRIES, payload: countries.data });
+      })
+      .catch((error) => console.error(error));
+  };
+}
+
+export function postActivity(obj) {
+  return function (dispatch) {
+    axios
+      .post("http://localhost:3001/activity", obj)
+      .then((activity) => {
+        dispatch({ type: POST_ACTIVITY, payload: activity.config.data });
       })
       .catch((error) => console.error(error));
   };

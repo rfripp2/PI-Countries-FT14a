@@ -8,6 +8,28 @@ const router = Router();
 router.get("/", (req, res) => {
   const { name } = req.query;
 
+  const { continent, activities, orderBy, order, page } = req.query;
+  if (continent && orderBy && order && page) {
+    return Country.findAll({
+      attributes: ["flag", "name", "continent"],
+      where: {
+        continent: continent,
+      },
+      order: [[orderBy, order]],
+      limit: 10,
+      offset: page * 10,
+    }).then((countries) => res.json(countries));
+  }
+
+  if (activities) {
+    return Activity.findAll({
+      include: Country,
+      where: {
+        name: activities,
+      },
+    }).then((countries) => res.json(countries));
+  }
+
   // If no name as query
   if (!name) {
     return Country.findAll({
@@ -18,32 +40,20 @@ router.get("/", (req, res) => {
     });
   }
 
-  return Country.findAll({
-    attributes: ["flag", "name", "continent"],
-    where: {
-      name: {
-        [Op.iLike]: `%${name}%`,
+  if (!continent) {
+    return Country.findAll({
+      attributes: ["flag", "name", "continent"],
+      where: {
+        name: {
+          [Op.iLike]: `%${name}%`,
+        },
       },
-    },
-  }).then((countries) => {
-    return countries.length > 0
-      ? res.json(countries)
-      : res.send("No Countries found");
-  });
-});
-
-router.post("/", (req, res) => {
-  const { continents, activities, orderBy, order, page } = req.body;
-
-  Country.findAll({
-    attributes: ["flag", "name", "continent"],
-    where: {
-      continent: continents,
-    },
-    order: [[orderBy, order]],
-    limit: 10,
-    offset: page * 10,
-  }).then((countries) => res.json(countries));
+    }).then((countries) => {
+      return countries.length > 0
+        ? res.json(countries)
+        : res.send("No Countries found");
+    });
+  }
 });
 
 router.get("/:id", (req, res) => {
