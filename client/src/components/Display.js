@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 /* import { NavLink } from "react-router-dom"; */
 import { connect } from "react-redux";
 import { getInitialCountries } from "../actions/actions";
+import { filteredCountries } from "../actions/actions";
 import { CountryCointainer } from "./CountryCointainer";
 import styles from "./Display.module.css";
 export function Countries(props) {
@@ -31,6 +32,21 @@ export function Countries(props) {
     return (
       <div className={styles.flex}>
         {props.searchedCountries.map((x) => {
+          return (
+            <CountryCointainer
+              key={x.name}
+              name={x.name}
+              continent={x.continent}
+              flag={x.flag}
+            ></CountryCointainer>
+          );
+        })}
+      </div>
+    );
+  } else {
+    return (
+      <div className={styles.flex}>
+        {props.filteredCountries.map((x) => {
           return (
             <CountryCointainer
               key={x.name}

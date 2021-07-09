@@ -1,6 +1,7 @@
 import {
   GET_INITIAL_COUNTRIES,
   GET_SEARCHED_COUNTRIES,
+  FILTERED_COUNTRIES,
 } from "../actions/actions";
 
 const initialState = {
@@ -19,6 +20,11 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
         searchedCountries: state.searchedCountries.concat(action.payload),
+      };
+    case FILTERED_COUNTRIES:
+      return {
+        ...state,
+        filteredCountries: action.payload,
       };
     default:
       return state;
