@@ -60,9 +60,16 @@ export function Activity(props) {
 
   function handleSubmit(e) {
     e.preventDefault();
-    props.postActivity(values);
     console.log(values);
-    return <h3>Activity Created</h3>;
+    e.target.reset();
+    setValues({
+      name: "",
+      dificulty: "",
+      duration: "",
+      season: "",
+      country: "",
+    });
+    props.postActivity(values);
   }
   return (
     <div>
@@ -70,7 +77,7 @@ export function Activity(props) {
       <form type="submit" onSubmit={handleSubmit}>
         <label>Name: </label>
         <input
-          className={errors.hasOwnProperty("name") && styles.danger}
+          className={errors.hasOwnProperty("name") ? styles.danger : undefined}
           type="text"
           name="name"
           value={props.name}
@@ -88,7 +95,9 @@ export function Activity(props) {
         <div>{errors.dificulty}</div>
         <label>Duration: </label>
         <input
-          className={errors.hasOwnProperty("duration") && styles.danger}
+          className={
+            errors.hasOwnProperty("duration") ? styles.danger : undefined
+          }
           type="number"
           name="duration"
           value={props.duration}
@@ -97,7 +106,9 @@ export function Activity(props) {
         <div>{errors.duration}</div>
         <label>Season: </label>
         <input
-          className={errors.hasOwnProperty("season") && styles.danger}
+          className={
+            errors.hasOwnProperty("season") ? styles.danger : undefined
+          }
           type="text"
           name="season"
           value={props.season}
@@ -105,22 +116,28 @@ export function Activity(props) {
         ></input>
         <div>{errors.season}</div>
         <label>Country: </label>
+        <div>To add it to more than onecountry,do: Argentina,Brazil,...</div>
         <input
-          className={errors.hasOwnProperty("country") && styles.danger}
+          className={
+            errors.hasOwnProperty("country") ? styles.danger : undefined
+          }
           type="text"
           name="country"
           value={props.country}
           onChange={handleOnChange}
         ></input>
+
         <div>{errors.country}</div>
         <button
           type="submit"
+          /* onSubmit={handleSubmit} */
           disabled={
-            Object.keys(errors).length > 0 ||
-            props.name === "" ||
-            props.dificulty === "" ||
-            props.duration === "" ||
-            props.season === ""
+            values.name.length < 1 ||
+            values.dificulty.length < 1 ||
+            values.duration.length < 1 ||
+            values.season.length < 1 ||
+            values.country.length < 1 ||
+            Object.keys(errors).length
           }
         >
           Add

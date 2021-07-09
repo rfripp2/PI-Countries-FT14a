@@ -39,7 +39,7 @@ export function postActivity(obj) {
     axios
       .post("http://localhost:3001/activity", obj)
       .then((activity) => {
-        dispatch({ type: POST_ACTIVITY, payload: activity.config.data });
+        dispatch({ type: POST_ACTIVITY, payload: activity.data });
       })
       .catch((error) => console.error(error));
   };

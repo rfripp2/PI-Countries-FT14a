@@ -93,6 +93,15 @@ export function Filters(props) {
               </label>
             );
           })}
+
+          {props.activities.map((x) => {
+            return (
+              <label key={x.name}>
+                <input type="radio"></input>
+                <span>{x.name}</span>
+              </label>
+            );
+          })}
         </div>
         <div>
           <label>Order by name :</label>
@@ -159,6 +168,12 @@ export function Filters(props) {
   );
 }
 
-export default connect(null, {
+function mapStateToProps(state) {
+  return {
+    activities: state.activities,
+  };
+}
+
+export default connect(mapStateToProps, {
   filteredCountries,
 })(Filters);
