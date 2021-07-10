@@ -6,22 +6,35 @@ const router = Router();
 
 router.post("/", async (req, res) => {
   const { name, dificulty, duration, season, country } = req.body;
-  const countryFound = await Country.findOne({
+  /* const countryFound = await Country.findOne({
     where: {
       name: {
         [Op.iLike]: country,
       },
     },
-  });
+  }); */
   const activityCreated = await Activity.create({
     name,
     dificulty,
     duration,
     season,
   });
-  await countryFound.addActivity(activityCreated);
-  await activityCreated.setCountries(countryFound);
-  return res.sendStatus(200);
+
+  country.map(async (x) => {
+    let countryFound = await Country.findOne({
+      where: {
+        name: {
+          [Op.iLike]: x,
+        },
+      },
+    });
+    if (countryFound) {
+      await activityCreated.setCountries(countryFound);
+      await countryFound.addActivity(activityCreated);
+    }
+  });
+
+  return res.json(activityCreated);
 });
 
 module.exports = router;

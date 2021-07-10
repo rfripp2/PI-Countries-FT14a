@@ -62,6 +62,7 @@ export function Activity(props) {
     e.preventDefault();
     console.log(values);
     e.target.reset();
+    props.postActivity(values);
     setValues({
       name: "",
       dificulty: "",
@@ -69,7 +70,6 @@ export function Activity(props) {
       season: "",
       country: "",
     });
-    props.postActivity(values);
   }
   return (
     <div>

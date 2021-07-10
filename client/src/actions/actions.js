@@ -35,6 +35,7 @@ export function filteredCountries(continent, orderBy, order, page) {
 }
 
 export function postActivity(obj) {
+  obj.country = obj.country.split(",");
   return function (dispatch) {
     axios
       .post("http://localhost:3001/activity", obj)

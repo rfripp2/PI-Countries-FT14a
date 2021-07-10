@@ -64,10 +64,10 @@ export function Filters(props) {
     setFilters({
       ...filters,
       page: 0,
-      continent: "",
+      /*  continent: "",
       orderBy: "",
       order: "",
-      activity: "",
+      activity: "", */
     });
     props.filteredCountries(continent, orderBy, order, (page = 0));
   }
