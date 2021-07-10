@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { filteredCountries } from "../actions/actions";
 import { connect } from "react-redux";
-
+import styles from "./Filters.module.css";
 const continents = [
   {
     id: "Africa",
@@ -31,6 +31,11 @@ export function Filters(props) {
     orderBy: "",
     order: "",
     page: 0,
+    activity: "",
+  });
+  const [displays, setDisplays] = useState({
+    cont: false,
+    act: false,
   });
   let { continent, orderBy, order, page } = filters;
 
@@ -41,12 +46,28 @@ export function Filters(props) {
     });
   }
 
+  function handleDisplay(e) {
+    e.preventDefault();
+    for (const prop in displays) {
+      if ([e.target.name === false]) {
+        setDisplays({
+          [e.target.name]: true,
+        });
+      }
+    }
+    console.log(displays);
+  }
+
   function handleSubmit(e) {
     e.preventDefault();
     console.log(filters);
     setFilters({
       ...filters,
       page: 0,
+      continent: "",
+      orderBy: "",
+      order: "",
+      activity: "",
     });
     props.filteredCountries(continent, orderBy, order, (page = 0));
   }
@@ -73,12 +94,30 @@ export function Filters(props) {
 
   return (
     <div>
+      <button
+        className={displays.cont ? styles.activated : ""}
+        type="button"
+        name="cont"
+        value={displays.cont}
+        onClick={handleDisplay}
+      >
+        Filter by Continent
+      </button>
+      <button
+        className={displays.act ? styles.activated : ""}
+        type="button"
+        name="act"
+        value={displays.act}
+        onClick={handleDisplay}
+      >
+        filter by Activity
+      </button>
       <form
         onSubmit={(e) => {
           handleSubmit(e);
         }}
       >
-        <div>
+        <div className={!displays.cont ? styles.hide : ""}>
           {continents.map((x) => {
             return (
               <label key={x.id}>
@@ -93,11 +132,18 @@ export function Filters(props) {
               </label>
             );
           })}
-
+        </div>
+        <div className={!displays.act ? styles.hide : ""}>
           {props.activities.map((x) => {
             return (
               <label key={x.name}>
-                <input type="radio"></input>
+                <input
+                  name="activity"
+                  type="radio"
+                  checked={filters.activity === x.name}
+                  value={x.name}
+                  onChange={handleOnChange}
+                ></input>
                 <span>{x.name}</span>
               </label>
             );
