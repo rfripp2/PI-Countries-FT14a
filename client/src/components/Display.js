@@ -1,8 +1,7 @@
 import React, { useEffect } from "react";
 /* import { NavLink } from "react-router-dom"; */
 import { connect } from "react-redux";
-import { getInitialCountries } from "../actions/actions";
-import { filteredCountries } from "../actions/actions";
+import { filteredActivities, getInitialCountries } from "../actions/actions";
 import { CountryCointainer } from "./CountryCointainer";
 import styles from "./Display.module.css";
 export function Countries(props) {
@@ -10,9 +9,14 @@ export function Countries(props) {
     props.getInitialCountries();
   }, []);
 
-  if (
-    props.searchedCountries.length == 0 &&
-    props.filteredCountries.length == 0
+  if (props.filteredActivities.length > 0) {
+    /* let countries = props.filteredActivities.map((x) => x.countries);
+    console.log(countries); */
+    return null;
+  } else if (
+    props.searchedCountries.length === 0 &&
+    props.filteredCountries.length === 0 &&
+    props.filteredActivities.length === 0
   ) {
     return (
       <div className={styles.flex}>
@@ -28,7 +32,7 @@ export function Countries(props) {
         })}
       </div>
     );
-  } else if (props.filteredCountries.length == 0) {
+  } else if (props.filteredCountries.length === 0) {
     return (
       <div className={styles.flex}>
         {props.searchedCountries.map((x) => {
@@ -66,6 +70,7 @@ function mapStateToProps(state) {
     initialCountries: state.initialCountries,
     searchedCountries: state.searchedCountries,
     filteredCountries: state.filteredCountries,
+    filteredActivities: state.filteredActivities,
   };
 }
 

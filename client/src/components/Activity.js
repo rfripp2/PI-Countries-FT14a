@@ -38,7 +38,7 @@ export function Activity(props) {
   const [errors, setErrors] = useState({});
 
   function handleOnChange(e) {
-    if ([e.target.name] == "dificulty" || [e.target.name] == "duration") {
+    if ([e.target.name] === "dificulty" || [e.target.name] === "duration") {
       setValues({
         ...values,
         [e.target.name]: parseInt(e.target.value),
@@ -134,10 +134,10 @@ export function Activity(props) {
           disabled={
             values.name.length < 1 ||
             values.dificulty.length < 1 ||
-            values.duration.length < 1 ||
+            /* values.duration.length < 1 || */
             values.season.length < 1 ||
-            values.country.length < 1 ||
-            Object.keys(errors).length
+            values.country.length < 1
+            /*  Object.keys(errors).length */
           }
         >
           Add

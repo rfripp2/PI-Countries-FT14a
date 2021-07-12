@@ -3,6 +3,7 @@ export const GET_INITIAL_COUNTRIES = "GET_INITIAL_COUNTRIES";
 export const GET_SEARCHED_COUNTRIES = "GET_SEARCHED_COUNTRIES";
 export const FILTERED_COUNTRIES = "FILTERED_COUNTRIES";
 export const POST_ACTIVITY = "POST_ACTIVITY";
+export const FILTERED_ACTIVITIES = "FILTERED_ACTIVITIES";
 export function getInitialCountries() {
   return function (dispatch) {
     axios.get("http://localhost:3001/countries/").then((countries) => {
@@ -31,6 +32,19 @@ export function filteredCountries(continent, orderBy, order, page) {
         dispatch({ type: FILTERED_COUNTRIES, payload: countries.data });
       })
       .catch((error) => console.error(error));
+  };
+}
+
+export function filteredActivities(activity) {
+  return function (dispatch) {
+    axios
+      .get(`http://localhost:3001/countries?activity=${activity}`)
+      .then((countries) => {
+        return countries.data.map((x) => x.countries);
+      })
+      .then((result) => {
+        dispatch({ type: FILTERED_ACTIVITIES, payload: result });
+      });
   };
 }
 

@@ -6,7 +6,7 @@ export function CountryCointainer({ name, continent, flag }) {
       <li>
         <h3>{name}</h3>
         <h4>{continent}</h4>
-        <img className={styles.imgSize} src={flag}></img>
+        <img alt={`${name} flag`} className={styles.imgSize} src={flag}></img>
       </li>
     </ul>
   );

@@ -8,7 +8,7 @@ const router = Router();
 router.get("/", (req, res) => {
   const { name } = req.query;
 
-  const { continent, activities, orderBy, order, page } = req.query;
+  const { continent, activity, orderBy, order, page } = req.query;
   if (continent && orderBy && order && page) {
     return Country.findAll({
       attributes: ["flag", "name", "continent"],
@@ -21,11 +21,11 @@ router.get("/", (req, res) => {
     }).then((countries) => res.json(countries));
   }
 
-  if (activities) {
+  if (activity) {
     return Activity.findAll({
       include: Country,
       where: {
-        name: activities,
+        name: activity,
       },
     }).then((countries) => res.json(countries));
   }

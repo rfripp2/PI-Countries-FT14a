@@ -1,29 +1,8 @@
 import React, { useState } from "react";
-import { filteredCountries } from "../actions/actions";
+import { filteredCountries, filteredActivities } from "../actions/actions";
+import { continents } from "../utils/Filters-utils";
 import { connect } from "react-redux";
 import styles from "./Filters.module.css";
-const continents = [
-  {
-    id: "Africa",
-    name: "Africa",
-  },
-  {
-    id: "Asia",
-    name: "Asia",
-  },
-  {
-    id: "Americas",
-    name: "Americas",
-  },
-  {
-    id: "Europe",
-    name: "Europe",
-  },
-  {
-    id: "Oceania",
-    name: "Oceania",
-  },
-];
 
 export function Filters(props) {
   const [filters, setFilters] = useState({
@@ -37,7 +16,7 @@ export function Filters(props) {
     cont: false,
     act: false,
   });
-  let { continent, orderBy, order, page } = filters;
+  let { continent, activity, orderBy, order, page } = filters;
 
   function handleOnChange(e) {
     setFilters({
@@ -48,32 +27,40 @@ export function Filters(props) {
 
   function handleDisplay(e) {
     e.preventDefault();
-    for (const prop in displays) {
+    for (const _prop in displays) {
       if ([e.target.name === false]) {
         setDisplays({
           [e.target.name]: true,
         });
       }
     }
-    console.log(displays);
   }
 
   function handleSubmit(e) {
     e.preventDefault();
     console.log(filters);
-    setFilters({
-      ...filters,
-      page: 0,
-      /*  continent: "",
-      orderBy: "",
-      order: "",
-      activity: "", */
-    });
-    props.filteredCountries(continent, orderBy, order, (page = 0));
+    if (continent && continent !== "" && displays.cont) {
+      console.log("here?");
+      setFilters({
+        ...filters,
+        activity: false,
+        page: 0,
+      });
+      props.filteredCountries(continent, orderBy, order, (page = 0));
+    }
+
+    if (activity && activity !== "" && displays.act) {
+      setFilters({
+        ...filters,
+        continent: false,
+        page: 0,
+      });
+      props.filteredActivities(activity);
+    }
   }
 
   function handleLeftPage(e) {
-    if (page != 0) {
+    if (page !== 0) {
       setFilters({
         ...filters,
         page: --page,
@@ -84,6 +71,7 @@ export function Filters(props) {
   }
 
   function handleRightPage(e) {
+    console.log(page);
     setFilters({
       ...filters,
       page: ++page,
@@ -222,4 +210,5 @@ function mapStateToProps(state) {
 
 export default connect(mapStateToProps, {
   filteredCountries,
+  filteredActivities,
 })(Filters);
