@@ -40,10 +40,7 @@ export function filteredActivities(activity) {
     axios
       .get(`http://localhost:3001/countries?activity=${activity}`)
       .then((countries) => {
-        return countries.data.map((x) => x.countries);
-      })
-      .then((result) => {
-        dispatch({ type: FILTERED_ACTIVITIES, payload: result });
+        dispatch({ type: FILTERED_ACTIVITIES, payload: countries.data });
       });
   };
 }

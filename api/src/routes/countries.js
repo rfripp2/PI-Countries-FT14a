@@ -22,11 +22,15 @@ router.get("/", (req, res) => {
   }
 
   if (activity) {
-    return Activity.findAll({
-      include: Country,
-      where: {
-        name: activity,
-      },
+    return Country.findAll({
+      include: [
+        {
+          model: Activity,
+          where: {
+            name: activity,
+          },
+        },
+      ],
     }).then((countries) => res.json(countries));
   }
 
