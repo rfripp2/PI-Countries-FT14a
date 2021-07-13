@@ -12,22 +12,6 @@ export function Countries(props) {
     props.getInitialCountries();
   }, []);
 
-  /* if (props.filteredActivities.length > 0) {
-    return (
-      <div className={styles.flex}>
-        {props.filteredActivities.map((x) => {
-          return (
-            <CountryCointainer
-              key={x.name}
-              name={x.name}
-              continent={x.continent}
-              flag={x.flag}
-            ></CountryCointainer>
-          );
-        })}
-      </div>
-    );
-  } */
   // INITIAL COUNTRIES
   if (
     props.searchedCountries.length === 0 &&

@@ -24,11 +24,13 @@ function rootReducer(state = initialState, action) {
     case GET_SEARCHED_COUNTRIES:
       return {
         ...state,
+        filteredCountries: [],
         searchedCountries: state.searchedCountries.concat(action.payload),
       };
     case FILTERED_COUNTRIES:
       return {
         ...state,
+        searchedCountries: [],
         filteredCountries: action.payload,
       };
     case GET_ACTIVITIES:
