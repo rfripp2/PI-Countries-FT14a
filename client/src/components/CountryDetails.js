@@ -29,7 +29,7 @@ export function CountryDetails(props) {
       <h3>Area: {area}</h3>
       <h3>Population: {population}</h3>
       <h3>Activities</h3>
-      {activities.map((x) => {
+      {/*  {activities.map((x) => {
         return (
           <div>
             <ActivityContainer
@@ -40,7 +40,23 @@ export function CountryDetails(props) {
             ></ActivityContainer>
           </div>
         );
-      })}
+      })} */}
+      {activities ? (
+        activities.map((x) => {
+          return (
+            <div>
+              <ActivityContainer
+                name={x.name}
+                dificulty={x.dificulty}
+                duration={x.duration}
+                season={x.season}
+              ></ActivityContainer>
+            </div>
+          );
+        })
+      ) : (
+        <h2>Loading...</h2>
+      )}
     </div>
   );
 }
@@ -48,6 +64,7 @@ export function CountryDetails(props) {
 function mapStateToProps(state) {
   return {
     countryDetail: state.countryDetail,
+    activities: state.activities,
   };
 }
 export default connect(mapStateToProps, { getCountryDetail })(CountryDetails);

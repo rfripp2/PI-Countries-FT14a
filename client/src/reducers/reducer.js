@@ -29,7 +29,6 @@ function rootReducer(state = initialState, action) {
     case FILTERED_COUNTRIES:
       return {
         ...state,
-        searchedCountries: [],
         filteredCountries: action.payload,
       };
     case GET_ACTIVITIES:
