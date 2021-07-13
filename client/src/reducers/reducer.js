@@ -2,8 +2,8 @@ import {
   GET_INITIAL_COUNTRIES,
   GET_SEARCHED_COUNTRIES,
   FILTERED_COUNTRIES,
-  POST_ACTIVITY,
-  FILTERED_ACTIVITIES,
+  GET_ACTIVITIES,
+  GET_COUNTRY_DETAIL,
 } from "../actions/actions";
 
 const initialState = {
@@ -12,6 +12,7 @@ const initialState = {
   filteredCountries: [],
   activities: [],
   filteredActivities: [],
+  countryDetail: [],
 };
 function rootReducer(state = initialState, action) {
   switch (action.type) {
@@ -28,18 +29,21 @@ function rootReducer(state = initialState, action) {
     case FILTERED_COUNTRIES:
       return {
         ...state,
+        searchedCountries: [],
         filteredCountries: action.payload,
       };
-    case POST_ACTIVITY:
+    case GET_ACTIVITIES:
       return {
         ...state,
-        activities: state.activities.concat(action.payload),
+        activities: action.payload,
       };
-    case FILTERED_ACTIVITIES:
+
+    case GET_COUNTRY_DETAIL:
       return {
         ...state,
-        filteredActivities: action.payload,
+        countryDetail: action.payload,
       };
+
     default:
       return state;
   }

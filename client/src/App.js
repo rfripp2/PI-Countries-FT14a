@@ -8,6 +8,7 @@ import Searcher from "./components/Searcher";
 import Filters from "./components/Filters";
 import Nav from "./components/Nav";
 import Activity from "./components/Activity";
+import CountryDetails from "./components/CountryDetails";
 function App() {
   return (
     <div className="App">
@@ -17,10 +18,11 @@ function App() {
         <Route path="/countries" component={Nav}></Route>
         <Route path="/activities" component={Nav}></Route>
       </Switch>
-      <Route path="/countries" component={Filters}></Route>
-      <Route path="/countries" component={Searcher}></Route>
-      <Route path="/countries" component={Display}></Route>
+      <Route exact path="/countries" component={Filters}></Route>
+      <Route exact path="/countries" component={Searcher}></Route>
+      <Route exact path="/countries" component={Display}></Route>
       <Route exact path="/activities" component={Activity}></Route>
+      <Route exact path="/countries/:id" component={CountryDetails}></Route>
     </div>
   );
 }

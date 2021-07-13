@@ -1,10 +1,18 @@
-import React, { useState } from "react";
-import { filteredCountries, filteredActivities } from "../actions/actions";
+import React, { useEffect, useState } from "react";
+import {
+  filteredCountries,
+  getActivities,
+  filteredActivities,
+} from "../actions/actions";
 import { continents } from "../utils/Filters-utils";
 import { connect } from "react-redux";
 import styles from "./Filters.module.css";
 
 export function Filters(props) {
+  useEffect(() => {
+    props.getActivities();
+  }, []);
+
   const [filters, setFilters] = useState({
     continent: "",
     orderBy: "",
@@ -55,7 +63,7 @@ export function Filters(props) {
         continent: false,
         page: 0,
       });
-      props.filteredActivities(activity);
+      props.filteredActivities(activity, orderBy, order);
     }
   }
 
@@ -210,5 +218,6 @@ function mapStateToProps(state) {
 
 export default connect(mapStateToProps, {
   filteredCountries,
+  getActivities,
   filteredActivities,
 })(Filters);

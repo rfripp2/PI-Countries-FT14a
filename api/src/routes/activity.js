@@ -37,4 +37,9 @@ router.post("/", async (req, res) => {
   return res.json(activityCreated);
 });
 
+// GET Activities list for maping options on the front
+router.get("/", (req, res) => {
+  Activity.findAll().then((activities) => res.json(activities));
+});
+
 module.exports = router;

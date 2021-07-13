@@ -11,7 +11,7 @@ router.get("/", (req, res) => {
   const { continent, activity, orderBy, order, page } = req.query;
   if (continent && orderBy && order && page) {
     return Country.findAll({
-      attributes: ["flag", "name", "continent"],
+      attributes: ["flag", "name", "continent", "ID"],
       where: {
         continent: continent,
       },
@@ -46,7 +46,7 @@ router.get("/", (req, res) => {
 
   if (!continent) {
     return Country.findAll({
-      attributes: ["flag", "name", "continent"],
+      attributes: ["flag", "name", "continent", "ID"],
       where: {
         name: {
           [Op.iLike]: `%${name}%`,

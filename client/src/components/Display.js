@@ -1,19 +1,35 @@
 import React, { useEffect } from "react";
-/* import { NavLink } from "react-router-dom"; */
+import { NavLink } from "react-router-dom";
 import { connect } from "react-redux";
-import { filteredActivities, getInitialCountries } from "../actions/actions";
+import { getActivities, getInitialCountries } from "../actions/actions";
 import { CountryCointainer } from "./CountryCointainer";
 import styles from "./Display.module.css";
 export function Countries(props) {
   useEffect(() => {
+    props.getActivities();
+  }, []);
+  useEffect(() => {
     props.getInitialCountries();
   }, []);
 
-  if (props.filteredActivities.length > 0) {
-    /* let countries = props.filteredActivities.map((x) => x.countries);
-    console.log(countries); */
-    return null;
-  } else if (
+  /* if (props.filteredActivities.length > 0) {
+    return (
+      <div className={styles.flex}>
+        {props.filteredActivities.map((x) => {
+          return (
+            <CountryCointainer
+              key={x.name}
+              name={x.name}
+              continent={x.continent}
+              flag={x.flag}
+            ></CountryCointainer>
+          );
+        })}
+      </div>
+    );
+  } */
+  // INITIAL COUNTRIES
+  if (
     props.searchedCountries.length === 0 &&
     props.filteredCountries.length === 0 &&
     props.filteredActivities.length === 0
@@ -27,11 +43,14 @@ export function Countries(props) {
               name={x.name}
               continent={x.continent}
               flag={x.flag}
+              ID={x.ID}
             ></CountryCointainer>
           );
         })}
       </div>
     );
+
+    // SEARCHED COUNTRIES
   } else if (props.filteredCountries.length === 0) {
     return (
       <div className={styles.flex}>
@@ -42,12 +61,14 @@ export function Countries(props) {
               name={x.name}
               continent={x.continent}
               flag={x.flag}
+              ID={x.ID}
             ></CountryCointainer>
           );
         })}
       </div>
     );
   } else {
+    // FILTERED COUNTRIES
     return (
       <div className={styles.flex}>
         {props.filteredCountries.map((x) => {
@@ -57,6 +78,7 @@ export function Countries(props) {
               name={x.name}
               continent={x.continent}
               flag={x.flag}
+              ID={x.ID}
             ></CountryCointainer>
           );
         })}
@@ -76,4 +98,5 @@ function mapStateToProps(state) {
 
 export default connect(mapStateToProps, {
   getInitialCountries,
+  getActivities,
 })(Countries);
