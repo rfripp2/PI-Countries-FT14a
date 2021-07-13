@@ -10,7 +10,7 @@ router.get("/", (req, res) => {
 
   const { continent, activity, orderBy, order, page } = req.query;
   if (continent && orderBy && order && page) {
-    return Country.findAll({
+    return Country.findAndCountAll({
       attributes: ["flag", "name", "continent", "ID"],
       where: {
         continent: continent,
@@ -22,7 +22,7 @@ router.get("/", (req, res) => {
   }
 
   if (activity) {
-    return Country.findAll({
+    return Country.findAndCountAll({
       include: [
         {
           model: Activity,

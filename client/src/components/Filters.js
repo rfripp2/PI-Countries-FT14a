@@ -13,6 +13,8 @@ export function Filters(props) {
     props.getActivities();
   }, []);
 
+  let uniqueActivities = [...new Set(props.activities.map((x) => x.name))];
+
   const [filters, setFilters] = useState({
     continent: "",
     orderBy: "",
@@ -63,7 +65,7 @@ export function Filters(props) {
         continent: false,
         page: 0,
       });
-      props.filteredActivities(activity, orderBy, order);
+      props.filteredActivities(activity, orderBy, order, page);
     }
   }
 
@@ -75,21 +77,36 @@ export function Filters(props) {
       });
     }
     e.preventDefault();
-    props.filteredCountries(continent, orderBy, order, page);
+    if (continent && continent !== "" && displays.cont) {
+      e.preventDefault();
+      return props.filteredCountries(continent, orderBy, order, page);
+    }
+    if (activity && activity !== "" && displays.act) {
+      e.preventDefault();
+      return props.filteredActivities(activity, orderBy, order, page);
+    }
   }
 
   function handleRightPage(e) {
-    console.log(page);
-    setFilters({
-      ...filters,
-      page: ++page,
-    });
-    e.preventDefault();
-    props.filteredCountries(continent, orderBy, order, page);
+    if (page * 10 < props.total) {
+      setFilters({
+        ...filters,
+        page: ++page,
+      });
+    }
+    if (continent && continent !== "" && displays.cont) {
+      e.preventDefault();
+      return props.filteredCountries(continent, orderBy, order, page);
+    }
+    if (activity && activity !== "" && displays.act) {
+      e.preventDefault();
+      return props.filteredActivities(activity, orderBy, order, page);
+    }
   }
 
   return (
     <div>
+      {console.log(uniqueActivities)}
       <button
         className={displays.cont ? styles.activated : ""}
         type="button"
@@ -130,17 +147,17 @@ export function Filters(props) {
           })}
         </div>
         <div className={!displays.act ? styles.hide : ""}>
-          {props.activities.map((x) => {
+          {uniqueActivities.map((x) => {
             return (
-              <label key={x.name}>
+              <label key={x}>
                 <input
                   name="activity"
                   type="radio"
-                  checked={filters.activity === x.name}
-                  value={x.name}
+                  checked={filters.activity === x}
+                  value={x}
                   onChange={handleOnChange}
                 ></input>
-                <span>{x.name}</span>
+                <span>{x}</span>
               </label>
             );
           })}
@@ -213,6 +230,7 @@ export function Filters(props) {
 function mapStateToProps(state) {
   return {
     activities: state.activities,
+    total: state.filteredCountries.count,
   };
 }
 

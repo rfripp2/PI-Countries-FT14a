@@ -36,7 +36,7 @@ export function filteredCountries(continent, orderBy, order, page) {
   };
 }
 
-export function filteredActivities(activity, orderBy, order, page) {
+export function filteredActivities(activity, orderBy, order, page, offset) {
   return function (dispatch) {
     axios
       .get(`http://localhost:3001/countries?activity=${activity}`)
@@ -44,7 +44,7 @@ export function filteredActivities(activity, orderBy, order, page) {
         return countries.data;
       })
       .then((countries) => {
-        return countries.sort((a, b) => {
+        countries.rows = countries.rows.sort((a, b) => {
           if (a[orderBy] < b[orderBy]) {
             return order === "DESC" ? -1 : 1;
           }
@@ -53,6 +53,7 @@ export function filteredActivities(activity, orderBy, order, page) {
           }
           return 0;
         });
+        return countries;
       })
       .then((result) => {
         dispatch({ type: FILTERED_COUNTRIES, payload: result });

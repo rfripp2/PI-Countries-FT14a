@@ -6,9 +6,6 @@ import { CountryCointainer } from "./CountryCointainer";
 import styles from "./Display.module.css";
 export function Countries(props) {
   useEffect(() => {
-    props.getActivities();
-  }, []);
-  useEffect(() => {
     props.getInitialCountries();
   }, []);
 
@@ -55,7 +52,7 @@ export function Countries(props) {
     // FILTERED COUNTRIES
     return (
       <div className={styles.flex}>
-        {props.filteredCountries.map((x) => {
+        {props.filteredCountries.rows.map((x) => {
           return (
             <CountryCointainer
               key={x.name}
