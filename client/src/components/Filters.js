@@ -94,7 +94,9 @@ export function Filters(props) {
   }
 
   function handleRightPage(e) {
-    if (offset < props.total) {
+    let nextPage = page + 1;
+
+    if (offset < props.total - 9) {
       offset += 10;
       page++;
       setOffset(offset);
@@ -109,7 +111,7 @@ export function Filters(props) {
       }
       if (activity && activity !== "" && displays.act) {
         e.preventDefault();
-        props.filteredActivities(activity, orderBy, order, page, offset);
+        props.filteredActivities(activity, orderBy, order, page, 10);
       }
     }
   }
