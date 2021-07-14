@@ -14,18 +14,19 @@ export function Filters(props) {
   }, []);
 
   let uniqueActivities = [...new Set(props.activities.map((x) => x.name))];
-
+  let [offset, setOffset] = useState(0);
   const [filters, setFilters] = useState({
     continent: "",
     orderBy: "",
     order: "",
-    page: 0,
+    page: 1,
     activity: "",
   });
   const [displays, setDisplays] = useState({
     cont: false,
     act: false,
   });
+
   let { continent, activity, orderBy, order, page } = filters;
 
   function handleOnChange(e) {
@@ -54,53 +55,62 @@ export function Filters(props) {
       setFilters({
         ...filters,
         activity: false,
-        page: 0,
+        page: 1,
       });
-      props.filteredCountries(continent, orderBy, order, (page = 0));
+      setOffset(0);
+      props.filteredCountries(continent, orderBy, order, page, offset);
     }
 
     if (activity && activity !== "" && displays.act) {
       setFilters({
         ...filters,
         continent: false,
-        page: 0,
+        page: 1,
       });
-      props.filteredActivities(activity, orderBy, order, page);
+      setOffset(0);
+      props.filteredActivities(activity, orderBy, order, page, offset);
     }
   }
 
   function handleLeftPage(e) {
-    if (page !== 0) {
+    if (offset !== 0) {
+      offset -= 10;
+      page--;
+      setOffset(offset);
       setFilters({
         ...filters,
-        page: --page,
+        page,
       });
     }
     e.preventDefault();
     if (continent && continent !== "" && displays.cont) {
       e.preventDefault();
-      return props.filteredCountries(continent, orderBy, order, page);
+      props.filteredCountries(continent, orderBy, order, page, offset);
     }
     if (activity && activity !== "" && displays.act) {
       e.preventDefault();
-      return props.filteredActivities(activity, orderBy, order, page);
+      props.filteredActivities(activity, orderBy, order, page, offset);
     }
   }
 
   function handleRightPage(e) {
-    if (page * 10 < props.total) {
+    if (offset < props.total) {
+      offset += 10;
+      page++;
+      setOffset(offset);
       setFilters({
         ...filters,
-        page: ++page,
+        page,
       });
-    }
-    if (continent && continent !== "" && displays.cont) {
-      e.preventDefault();
-      return props.filteredCountries(continent, orderBy, order, page);
-    }
-    if (activity && activity !== "" && displays.act) {
-      e.preventDefault();
-      return props.filteredActivities(activity, orderBy, order, page);
+
+      if (continent && continent !== "" && displays.cont) {
+        e.preventDefault();
+        props.filteredCountries(continent, orderBy, order, page, offset);
+      }
+      if (activity && activity !== "" && displays.act) {
+        e.preventDefault();
+        props.filteredActivities(activity, orderBy, order, page, offset);
+      }
     }
   }
 
@@ -207,20 +217,10 @@ export function Filters(props) {
           Search{" "}
         </button>
       </form>
-      <button
-        type="submit"
-        onClick={(e) => {
-          handleLeftPage(e);
-        }}
-      >
+      <button type="button" onClick={handleLeftPage}>
         {"<"}
       </button>
-      <button
-        type="submit"
-        onClick={(e) => {
-          handleRightPage(e);
-        }}
-      >
+      <button type="button" onClick={handleRightPage}>
         {">"}
       </button>
     </div>
@@ -231,6 +231,7 @@ function mapStateToProps(state) {
   return {
     activities: state.activities,
     total: state.filteredCountries.count,
+    filteredCountries: state.filteredCountries.rows,
   };
 }
 

@@ -8,8 +8,8 @@ const router = Router();
 router.get("/", (req, res) => {
   const { name } = req.query;
 
-  const { continent, activity, orderBy, order, page } = req.query;
-  if (continent && orderBy && order && page) {
+  const { continent, activity, orderBy, order, page, offset } = req.query;
+  if (continent && orderBy && order && page && offset) {
     return Country.findAndCountAll({
       attributes: ["flag", "name", "continent", "ID"],
       where: {
@@ -17,7 +17,8 @@ router.get("/", (req, res) => {
       },
       order: [[orderBy, order]],
       limit: 10,
-      offset: page * 10,
+      /* offset: page * 10, */
+      offset: offset,
     }).then((countries) => res.json(countries));
   }
 

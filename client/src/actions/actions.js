@@ -23,11 +23,11 @@ export function getSearchedCountries(country) {
   };
 }
 
-export function filteredCountries(continent, orderBy, order, page) {
+export function filteredCountries(continent, orderBy, order, page, offset) {
   return function (dispatch) {
     axios
       .get(
-        `http://localhost:3001/countries?continent=${continent}&orderBy=${orderBy}&order=${order}&page=${page}`
+        `http://localhost:3001/countries?continent=${continent}&orderBy=${orderBy}&order=${order}&page=${page}&offset=${offset}`
       )
       .then((countries) => {
         dispatch({ type: FILTERED_COUNTRIES, payload: countries.data });
