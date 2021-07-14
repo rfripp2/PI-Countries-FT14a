@@ -36,23 +36,29 @@ export function filteredCountries(continent, orderBy, order, page, offset) {
   };
 }
 
-export function filteredActivities(activity, orderBy, order, page, offset) {
+export function filteredActivities(activity, orderBy, order, page, limit) {
   return function (dispatch) {
+    const startIndex = (page - 1) * limit;
+    const endIndex = page * limit;
     axios
-      .get(`http://localhost:3001/countries?activity=${activity}`)
+      .get(
+        `http://localhost:3001/countries?activity=${activity}&page=${page}&offset=${limit}`
+      )
       .then((countries) => {
         return countries.data;
       })
       .then((countries) => {
-        countries.rows = countries.rows.sort((a, b) => {
-          if (a[orderBy] < b[orderBy]) {
-            return order === "DESC" ? -1 : 1;
-          }
-          if (a[orderBy] > b[orderBy]) {
-            return order === "DESC" ? 1 : -1;
-          }
-          return 0;
-        });
+        countries.rows = countries.rows
+          .sort((a, b) => {
+            if (a[orderBy] < b[orderBy]) {
+              return order === "DESC" ? -1 : 1;
+            }
+            if (a[orderBy] > b[orderBy]) {
+              return order === "DESC" ? 1 : -1;
+            }
+            return 0;
+          })
+          .slice(startIndex, endIndex);
         return countries;
       })
       .then((result) => {

@@ -68,7 +68,7 @@ export function Filters(props) {
         page: 1,
       });
       setOffset(0);
-      props.filteredActivities(activity, orderBy, order, page, offset);
+      props.filteredActivities(activity, orderBy, order, page, 10);
     }
   }
 
@@ -89,7 +89,7 @@ export function Filters(props) {
     }
     if (activity && activity !== "" && displays.act) {
       e.preventDefault();
-      props.filteredActivities(activity, orderBy, order, page, offset);
+      props.filteredActivities(activity, orderBy, order, page, 10);
     }
   }
 
