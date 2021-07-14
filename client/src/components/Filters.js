@@ -14,6 +14,7 @@ export function Filters(props) {
   }, []);
 
   let uniqueActivities = [...new Set(props.activities.map((x) => x.name))];
+
   let [offset, setOffset] = useState(0);
   const [filters, setFilters] = useState({
     continent: "",
@@ -57,7 +58,7 @@ export function Filters(props) {
         activity: false,
         page: 1,
       });
-      setOffset(0);
+      setOffset((offset = 0));
       props.filteredCountries(continent, orderBy, order, page, offset);
     }
 
@@ -67,7 +68,7 @@ export function Filters(props) {
         continent: false,
         page: 1,
       });
-      setOffset(0);
+      setOffset((offset = 0));
       props.filteredActivities(activity, orderBy, order, page, 10);
     }
   }
@@ -94,9 +95,12 @@ export function Filters(props) {
   }
 
   function handleRightPage(e) {
-    let nextPage = page + 1;
+    /*   let nextPage = page + 1;
+    {
+      console.log(page, nextPage);
+    } */
 
-    if (offset < props.total - 9) {
+    if (page * 10 < props.total) {
       offset += 10;
       page++;
       setOffset(offset);
@@ -118,7 +122,6 @@ export function Filters(props) {
 
   return (
     <div>
-      {console.log(uniqueActivities)}
       <button
         className={displays.cont ? styles.activated : ""}
         type="button"
