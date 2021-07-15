@@ -1,0 +1,17 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato&display=swap");
+
+.background {
+  background: url("../images/blankmap-world.png") no-repeat center center fixed;
+  position: fixed;
+
+  /* Preserve aspet ratio */
+  min-width: 100%;
+  min-height: 100%;
+  background-color: #ffffff;
+}
+
+.link {
+  font-family: "Lato", "sans-serif";
+  text-decoration: none;
+  color: #353535;
+}

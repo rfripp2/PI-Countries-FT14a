@@ -1,0 +1,10 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato&display=swap");
+.link {
+  font-family: "Lato", "sans-serif";
+  text-decoration: none;
+  color: #353535;
+}
+
+.removeUlStyles {
+  list-style-type: none;
+}

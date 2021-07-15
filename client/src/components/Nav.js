@@ -1,14 +1,19 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import styles from "./Nav.module.css";
 export default function Nav() {
   return (
     <nav>
-      <ul>
+      <ul className={styles.removeUlStyles}>
         <li>
-          <NavLink to="/countries">Countries</NavLink>
+          <NavLink className={styles.link} to="/countries">
+            <h3>Countries</h3>
+          </NavLink>
         </li>
         <li>
-          <NavLink to="/activities">Create Activity</NavLink>
+          <NavLink className={styles.link} to="/activities">
+            <h3>Create Activity</h3>
+          </NavLink>
         </li>
       </ul>
     </nav>
