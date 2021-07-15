@@ -51,22 +51,24 @@ export function Filters(props) {
   function handleSubmit(e) {
     e.preventDefault();
     console.log(filters);
+    page = 1;
     if (continent && continent !== "" && displays.cont) {
       console.log("here?");
       setFilters({
         ...filters,
         activity: false,
-        page: 1,
+        page,
       });
       setOffset((offset = 0));
       props.filteredCountries(continent, orderBy, order, page, offset);
     }
 
     if (activity && activity !== "" && displays.act) {
+      page = 1;
       setFilters({
         ...filters,
         continent: false,
-        page: 1,
+        page,
       });
       setOffset((offset = 0));
       props.filteredActivities(activity, orderBy, order, page, 10);
@@ -123,7 +125,7 @@ export function Filters(props) {
   return (
     <div>
       <button
-        className={displays.cont ? styles.activated : ""}
+        className={displays.cont ? styles.activated : styles.buttonDefault}
         type="button"
         name="cont"
         value={displays.cont}
@@ -132,13 +134,13 @@ export function Filters(props) {
         Filter by Continent
       </button>
       <button
-        className={displays.act ? styles.activated : ""}
+        className={displays.act ? styles.activated : styles.buttonDefault}
         type="button"
         name="act"
         value={displays.act}
         onClick={handleDisplay}
       >
-        filter by Activity
+        Filter by Activity
       </button>
       <form
         onSubmit={(e) => {
@@ -148,7 +150,11 @@ export function Filters(props) {
         <div className={!displays.cont ? styles.hide : ""}>
           {continents.map((x) => {
             return (
-              <label key={x.id}>
+              <label key={x.id} className={styles.label}>
+                <span>
+                  {" "}
+                  <p className={styles.spanText}>{x.name}</p>
+                </span>
                 <input
                   type="radio"
                   checked={filters.continent === x.name}
@@ -156,7 +162,6 @@ export function Filters(props) {
                   name="continent"
                   onChange={handleOnChange}
                 ></input>
-                <span>{x.name}</span>
               </label>
             );
           })}
@@ -165,6 +170,10 @@ export function Filters(props) {
           {uniqueActivities.map((x) => {
             return (
               <label key={x}>
+                {" "}
+                <span>
+                  <p className={styles.spanText}>{x}</p>
+                </span>
                 <input
                   name="activity"
                   type="radio"
@@ -172,13 +181,16 @@ export function Filters(props) {
                   value={x}
                   onChange={handleOnChange}
                 ></input>
-                <span>{x}</span>
               </label>
             );
           })}
         </div>
-        <div>
-          <label>Order by name :</label>
+        <div className={!displays.act && !displays.cont ? styles.hide : ""}>
+          <label>
+            <span className={styles.spanText}>
+              <p>By name:</p>
+            </span>
+          </label>
           <input
             type="radio"
             checked={filters.orderBy === "name"}
@@ -186,7 +198,11 @@ export function Filters(props) {
             name="orderBy"
             onChange={handleOnChange}
           ></input>
-          <label>Order by population :</label>
+          <label>
+            <span className={styles.spanText}>
+              <p>By population:</p>
+            </span>
+          </label>
           <input
             type="radio"
             checked={filters.orderBy === "population"}
@@ -195,7 +211,7 @@ export function Filters(props) {
             onChange={handleOnChange}
           ></input>
         </div>
-        <div>
+        <div className={!displays.act && !displays.cont ? styles.hide : ""}>
           <label>Asc :</label>
           <input
             type="radio"
@@ -213,21 +229,25 @@ export function Filters(props) {
             onChange={handleOnChange}
           ></input>
         </div>
-        <button
-          type="submit"
-          onSubmit={(e) => {
-            handleSubmit(e);
-          }}
-        >
-          Search{" "}
-        </button>
+        <div className={!displays.act && !displays.cont ? styles.hide : ""}>
+          <button
+            type="submit"
+            onSubmit={(e) => {
+              handleSubmit(e);
+            }}
+          >
+            Search{" "}
+          </button>
+        </div>
       </form>
-      <button type="button" onClick={handleLeftPage}>
-        {"<"}
-      </button>
-      <button type="button" onClick={handleRightPage}>
-        {">"}
-      </button>
+      <div className={!displays.act && !displays.cont ? styles.hide : ""}>
+        <button type="button" onClick={handleLeftPage}>
+          {"<"}
+        </button>
+        <button type="button" onClick={handleRightPage}>
+          {">"}
+        </button>
+      </div>
     </div>
   );
 }

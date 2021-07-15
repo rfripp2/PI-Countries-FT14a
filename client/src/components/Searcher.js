@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { getSearchedCountries } from "../actions/actions";
 import { connect } from "react-redux";
-
+import styles from "./Searcher.module.css";
 export function Searcher(props) {
   const [country, setCountry] = useState("");
   const handleOnChange = (e) => {
@@ -15,7 +15,7 @@ export function Searcher(props) {
   }
   return (
     <div>
-      <h2>Search Countries</h2>
+      <h2 className={styles.title}>Search Countries</h2>
       <form
         onSubmit={(e) => {
           handleSubmit(e);
@@ -32,6 +32,7 @@ export function Searcher(props) {
             handleSubmit(e);
           }}
           type="submit"
+          className={styles.button}
         >
           Search
         </button>

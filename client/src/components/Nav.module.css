@@ -8,3 +8,9 @@
 .removeUlStyles {
   list-style-type: none;
 }
+
+.inlineLi {
+  display: inline-block;
+  padding-left: 20px;
+  padding-right: 20px;
+}
