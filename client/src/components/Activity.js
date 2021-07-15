@@ -75,7 +75,9 @@ export function Activity(props) {
     <div>
       <h1>Post Activity</h1>
       <form type="submit" onSubmit={handleSubmit}>
-        <label>Name: </label>
+        <label>
+          <p>Name</p>
+        </label>
         <input
           className={errors.hasOwnProperty("name") ? styles.danger : undefined}
           type="text"
@@ -84,7 +86,9 @@ export function Activity(props) {
           onChange={handleOnChange}
         ></input>
         <div>{errors.name}</div>
-        <label>Dificulty: </label>
+        <label>
+          <p>Dificulty: 1-5</p>{" "}
+        </label>
         <input
           className={errors.hasOwnProperty("dificulty") && styles.danger}
           type="number"
@@ -93,7 +97,9 @@ export function Activity(props) {
           onChange={handleOnChange}
         ></input>
         <div>{errors.dificulty}</div>
-        <label>Duration: </label>
+        <label>
+          <p>Duration:</p>{" "}
+        </label>
         <input
           className={
             errors.hasOwnProperty("duration") ? styles.danger : undefined
@@ -104,7 +110,9 @@ export function Activity(props) {
           onChange={handleOnChange}
         ></input>
         <div>{errors.duration}</div>
-        <label>Season: </label>
+        <label>
+          <p>Season:</p>{" "}
+        </label>
         <input
           className={
             errors.hasOwnProperty("season") ? styles.danger : undefined
@@ -115,7 +123,9 @@ export function Activity(props) {
           onChange={handleOnChange}
         ></input>
         <div>{errors.season}</div>
-        <label>Country: </label>
+        <label>
+          <p>Country:</p>{" "}
+        </label>
         <div>To add it to more than onecountry,do: Argentina,Brazil,...</div>
         <input
           className={

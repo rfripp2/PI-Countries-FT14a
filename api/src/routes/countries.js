@@ -36,7 +36,7 @@ router.get("/", (req, res) => {
   }
 
   // If no name as query
-  if (!name) {
+  if (!name && !continent && !activity) {
     return Country.findAll({
       attributes: ["flag", "name", "continent", "ID"],
       limit: 10,
@@ -53,11 +53,11 @@ router.get("/", (req, res) => {
           [Op.iLike]: `%${name}%`,
         },
       },
-    }).then((countries) => {
-      return countries.length > 0
-        ? res.json(countries)
-        : res.send("No Countries found");
-    });
+    })
+      .then((countries) => {
+        if (countries.length > 0) return res.json(countries);
+      })
+      .catch((error) => console.error(error));
   }
 });
 

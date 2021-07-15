@@ -1,7 +1,30 @@
-.flex {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+@import url("https://fonts.googleapis.com/css2?family=Lato&display=swap");
+
+.container {
+  border: 1px solid black;
+  border-radius: 10px;
+  margin: 5px;
+  width: 18%;
+  text-align: center;
+}
+
+.link {
+  font-family: "Lato", "sans-serif";
+  text-decoration: none;
+  color: #000411;
+}
+
+.name {
+  text-align: center;
+  font-family: "Lato", "sans-serif";
+  color: #000411;
+  text-decoration: underline;
+}
+
+.continent {
+  text-align: center;
+  font-family: "Lato", "sans-serif";
+  color: #000411;
 }
 
 .padding {
@@ -10,6 +33,10 @@
 }
 
 .imgSize {
-  max-width: 75px;
-  max-height: 50px;
+  width: 100px;
+  height: 55px;
+}
+
+.removeUlStyles {
+  list-style-type: none;
 }

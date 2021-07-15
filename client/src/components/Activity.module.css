@@ -6,3 +6,7 @@ p.danger {
 input.danger {
   border: 2px solid red;
 }
+
+.label {
+  size: 200px;
+}

@@ -19,7 +19,8 @@ export function getSearchedCountries(country) {
       .get(`http://localhost:3001/countries?name=${country}`)
       .then((countries) => {
         dispatch({ type: GET_SEARCHED_COUNTRIES, payload: countries.data });
-      });
+      })
+      .catch((error) => console.error(error));
   };
 }
 

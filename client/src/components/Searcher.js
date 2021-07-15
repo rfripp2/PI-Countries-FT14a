@@ -14,7 +14,7 @@ export function Searcher(props) {
     props.getSearchedCountries(country);
   }
   return (
-    <div>
+    <div className={styles.container}>
       <h2 className={styles.title}>Search Countries</h2>
       <form
         onSubmit={(e) => {
