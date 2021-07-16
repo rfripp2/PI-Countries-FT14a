@@ -6,35 +6,33 @@
   margin: 5px;
   width: 18%;
   text-align: center;
+  display: flex;
+  justify-content: center;
+  background-color: #f2f2f2;
 }
 
 .link {
   font-family: "Lato", "sans-serif";
   text-decoration: none;
-  color: #000411;
+  color: #171b26;
 }
 
 .name {
   text-align: center;
   font-family: "Lato", "sans-serif";
-  color: #000411;
+  color: #171b26;
   text-decoration: underline;
+  max-width: 100px;
 }
 
 .continent {
   text-align: center;
   font-family: "Lato", "sans-serif";
-  color: #000411;
-}
-
-.padding {
-  padding-right: 500px;
-  margin-right: 500px;
+  color: #171b26;
 }
 
 .imgSize {
   width: 100px;
-  height: 55px;
 }
 
 .removeUlStyles {

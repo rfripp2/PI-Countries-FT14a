@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { getCountryDetail } from "../actions/actions";
 import { connect } from "react-redux";
 import { ActivityContainer } from "./ActivityContainer";
+import styles from "./CountryDetails.module.css";
 export function CountryDetails(props) {
   useEffect(() => {
     props.getCountryDetail(props.match.params.id);
@@ -21,42 +22,29 @@ export function CountryDetails(props) {
 
   return (
     <div>
-      <h2>{name}</h2>
+      <h2 className={styles.texts}>{name}</h2>
       <h3>{continent}</h3>
       <img src={flag}></img>
-      <h3>{capital}</h3>
+      <h3>Capital: {capital}</h3>
       <h3>Subregion: {subregion}</h3>
       <h3>Area: {area}</h3>
       <h3>Population: {population}</h3>
-      <h3>Activities</h3>
-      {/*  {activities.map((x) => {
-        return (
-          <div>
-            <ActivityContainer
-              name={x.name}
-              dificulty={x.dificulty}
-              duration={x.duration}
-              season={x.season}
-            ></ActivityContainer>
-          </div>
-        );
-      })} */}
-      {activities ? (
-        activities.map((x) => {
-          return (
-            <div>
+      <div className={styles.flex}>
+        {activities ? (
+          activities.map((x) => {
+            return (
               <ActivityContainer
                 name={x.name}
                 dificulty={x.dificulty}
                 duration={x.duration}
                 season={x.season}
               ></ActivityContainer>
-            </div>
-          );
-        })
-      ) : (
-        <h2>Loading...</h2>
-      )}
+            );
+          })
+        ) : (
+          <h2>Loading...</h2>
+        )}
+      </div>
     </div>
   );
 }

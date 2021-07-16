@@ -19,7 +19,9 @@ router.get("/", (req, res) => {
       limit: 10,
       /* offset: page * 10, */
       offset: offset,
-    }).then((countries) => res.json(countries));
+    })
+      .then((countries) => res.json(countries))
+      .catch((error) => console.error(error));
   }
 
   if (activity) {
@@ -32,7 +34,9 @@ router.get("/", (req, res) => {
           },
         },
       ],
-    }).then((countries) => res.json(countries));
+    })
+      .then((countries) => res.json(countries))
+      .catch((error) => console.error(error));
   }
 
   // If no name as query
@@ -40,9 +44,11 @@ router.get("/", (req, res) => {
     return Country.findAll({
       attributes: ["flag", "name", "continent", "ID"],
       limit: 10,
-    }).then((countries) => {
-      return res.json(countries);
-    });
+    })
+      .then((countries) => {
+        return res.json(countries);
+      })
+      .catch((error) => console.error(error));
   }
 
   if (!continent) {
@@ -79,9 +85,11 @@ router.get("/:id", (req, res) => {
     where: {
       ID: id.toUpperCase(),
     },
-  }).then((country) => {
-    return country ? res.json(country) : res.sendStatus(404);
-  });
+  })
+    .then((country) => {
+      return country ? res.json(country) : res.sendStatus(404);
+    })
+    .catch((error) => console.error(error));
 });
 
 module.exports = router;

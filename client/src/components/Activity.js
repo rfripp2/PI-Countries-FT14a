@@ -140,14 +140,13 @@ export function Activity(props) {
         <div>{errors.country}</div>
         <button
           type="submit"
-          /* onSubmit={handleSubmit} */
           disabled={
             values.name.length < 1 ||
             values.dificulty.length < 1 ||
             /* values.duration.length < 1 || */
             values.season.length < 1 ||
             values.country.length < 1
-            /*  Object.keys(errors).length */
+            /* Object.keys(errors).length */
           }
         >
           Add
