@@ -14,11 +14,7 @@ function validate(input) {
   ) {
     errors.dificulty =
       "Dificulty is required and must be a number between 1 and 5";
-  } else if (
-    !input.duration ||
-    input.duration === ""
-    /* typeof input.duration !== "number" */
-  ) {
+  } else if (!input.duration || input.duration === "") {
     errors.duration = "Duration is required and must be a number";
   } else if (!input.season || input.season === "") {
     errors.season = "Season is required";

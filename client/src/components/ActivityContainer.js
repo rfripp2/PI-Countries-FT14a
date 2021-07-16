@@ -1,9 +1,9 @@
 import React from "react";
 import styles from "./ActivityContainer.module.css";
-
+import { capitalizeFirstLetter } from "../utils/Filters-utils";
 export function ActivityContainer({ name, dificulty, duration, season }) {
-  name = name.charAt(0).toUpperCase() + name.slice(1);
-  season = season.charAt(0).toUpperCase() + season.slice(1);
+  name = capitalizeFirstLetter(name);
+  season = capitalizeFirstLetter(season);
   return (
     <div className={styles.container}>
       {console.log(name)}
