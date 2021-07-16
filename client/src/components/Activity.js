@@ -16,8 +16,8 @@ function validate(input) {
       "Dificulty is required and must be a number between 1 and 5";
   } else if (
     !input.duration ||
-    input.duration === "" ||
-    typeof input.duration !== "number"
+    input.duration === ""
+    /* typeof input.duration !== "number" */
   ) {
     errors.duration = "Duration is required and must be a number";
   } else if (!input.season || input.season === "") {
@@ -143,10 +143,10 @@ export function Activity(props) {
           disabled={
             values.name.length < 1 ||
             values.dificulty.length < 1 ||
-            /* values.duration.length < 1 || */
+            values.duration.length < 1 ||
             values.season.length < 1 ||
-            values.country.length < 1
-            /* Object.keys(errors).length */
+            values.country.length < 1 ||
+            Object.keys(errors).length
           }
         >
           Add
