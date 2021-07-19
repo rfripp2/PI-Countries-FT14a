@@ -1,21 +1,22 @@
 const { Router } = require("express");
 const { Country, Activity } = require("../db");
 const Sequelize = require("sequelize");
+const e = require("express");
 const Op = Sequelize.Op;
 const router = Router();
 
 router.post("/", async (req, res) => {
   const succes = true;
+
+  const { name, dificulty, duration, season, country } = req.body;
+
+  const activityCreated = await Activity.create({
+    name,
+    dificulty,
+    duration,
+    season,
+  });
   try {
-    const { name, dificulty, duration, season, country } = req.body;
-
-    const activityCreated = await Activity.create({
-      name,
-      dificulty,
-      duration,
-      season,
-    });
-
     country.map(async (x) => {
       let countryFound = await Country.findOne({
         where: {
@@ -27,13 +28,16 @@ router.post("/", async (req, res) => {
       if (countryFound) {
         await activityCreated.setCountries(countryFound);
         await countryFound.addActivity(activityCreated);
-        return res.send("Activity created succesfully");
+        return res.status(201).json(activityCreated);
       } else {
-        return res.send("Error");
+        res.json({
+          message:
+            "Activity was created but likely countries werent added correctly",
+        });
       }
     });
   } catch (error) {
-    console.error(error);
+    res.sendStatus(500);
   }
 });
 
@@ -41,7 +45,7 @@ router.post("/", async (req, res) => {
 router.get("/", (req, res) => {
   Activity.findAll()
     .then((activities) => res.json(activities))
-    .catch((error) => console.error(error));
+    .catch((error) => res.status(500).json({ message: error.message }));
 });
 
 module.exports = router;

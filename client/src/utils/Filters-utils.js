@@ -19,6 +19,10 @@ export const continents = [
     id: "Oceania",
     name: "Oceania",
   },
+  {
+    id: "Polar",
+    name: "Polar",
+  },
 ];
 
 export function capitalizeFirstLetter(string) {

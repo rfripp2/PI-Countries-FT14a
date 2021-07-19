@@ -5,6 +5,7 @@
   border-radius: 10px;
   margin: 5px;
   width: 18%;
+  max-height: 18%;
   text-align: center;
   display: flex;
   justify-content: center;

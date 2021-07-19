@@ -7,9 +7,12 @@ export const GET_ACTIVITIES = "GET_ACTIVITIES";
 export const GET_COUNTRY_DETAIL = "GET_COUNTRY_DETAIL";
 export function getInitialCountries() {
   return function (dispatch) {
-    axios.get("http://localhost:3001/countries/").then((countries) => {
-      dispatch({ type: GET_INITIAL_COUNTRIES, payload: countries.data });
-    });
+    axios
+      .get("http://localhost:3001/countries/")
+      .then((countries) => {
+        dispatch({ type: GET_INITIAL_COUNTRIES, payload: countries.data });
+      })
+      .catch((error) => console.error(error));
   };
 }
 
@@ -64,12 +67,13 @@ export function filteredActivities(activity, orderBy, order, page, limit) {
       })
       .then((result) => {
         dispatch({ type: FILTERED_COUNTRIES, payload: result });
-      });
+      })
+      .catch((error) => console.error(error));
   };
 }
 
 export function postActivity(obj) {
-  obj.country = obj.country.split(",");
+  obj.country = obj.country.split(" ");
   return function (dispatch) {
     axios
       .post("http://localhost:3001/activity", obj)
@@ -82,16 +86,22 @@ export function postActivity(obj) {
 
 export function getActivities() {
   return function (dispatch) {
-    axios.get("http://localhost:3001/activity").then((activities) => {
-      dispatch({ type: GET_ACTIVITIES, payload: activities.data });
-    });
+    axios
+      .get("http://localhost:3001/activity")
+      .then((activities) => {
+        dispatch({ type: GET_ACTIVITIES, payload: activities.data });
+      })
+      .catch((error) => console.error(error));
   };
 }
 
 export function getCountryDetail(id) {
   return function (dispatch) {
-    axios.get(`http://localhost:3001/countries/${id}`).then((detail) => {
-      dispatch({ type: GET_COUNTRY_DETAIL, payload: detail.data });
-    });
+    axios
+      .get(`http://localhost:3001/countries/${id}`)
+      .then((detail) => {
+        dispatch({ type: GET_COUNTRY_DETAIL, payload: detail.data });
+      })
+      .catch((error) => console.error(error));
   };
 }
