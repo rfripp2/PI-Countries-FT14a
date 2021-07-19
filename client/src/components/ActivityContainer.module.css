@@ -1,12 +1,17 @@
-@import url("https://fonts.googleapis.com/css2?family=Lato&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400&family=Syne:wght@600&display=swap");
 .container {
-  border: 1px solid black;
+  border: 1px;
   border-radius: 10px;
   margin: 5px;
   width: 18%;
-  background-color: #f2f2f2;
+  background-color: white;
 }
-h3 {
-  font-family: "Lato", "sans-serif";
-  color: #171b26;
+
+.name {
+  font-family: "Inter", "sans-serif";
+  color: #22318f;
+}
+.secondary {
+  font-family: "Inter", "sans-serif";
+  color: #22318f;
 }

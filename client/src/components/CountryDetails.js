@@ -21,13 +21,14 @@ export function CountryDetails(props) {
 
   return (
     <div>
-      <h2 className={styles.texts}>{name}</h2>
-      <h3>{continent}</h3>
-      <img alt={`${name} flag`} src={flag}></img>
-      <h3>Capital: {capital}</h3>
-      <h3>Subregion: {subregion}</h3>
-      <h3>Area: {area}</h3>
-      <h3>Population: {population}</h3>
+      <img className={styles.img} alt={`${name} flag`} src={flag}></img>
+      <h2 className={styles.name}>{name}</h2>
+      <h3 className={styles.secondary}>{continent}</h3>
+
+      <h3 className={styles.secondary}>Capital: {capital}</h3>
+      <h3 className={styles.secondary}>Subregion: {subregion}</h3>
+      <h3 className={styles.secondary}>Area: {area}</h3>
+      <h3 className={styles.secondary}>Population: {population}</h3>
       <div className={styles.flex}>
         {activities ? (
           activities.map((x) => {

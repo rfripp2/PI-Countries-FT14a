@@ -4,9 +4,11 @@ import styles from "./Start.module.css";
 export default function Start() {
   return (
     <div className={styles.background}>
-      <NavLink className={styles.link} exact to="/countries">
-        <h2 className={styles.link}>Go to app</h2>
-      </NavLink>
+      <button className={styles.button}>
+        <NavLink className={styles.link} exact to="/countries">
+          <h2 className={styles.link}>Go to app</h2>
+        </NavLink>
+      </button>
     </div>
   );
 }

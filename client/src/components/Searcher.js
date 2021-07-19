@@ -15,13 +15,14 @@ export function Searcher(props) {
   }
   return (
     <div className={styles.container}>
-      <h2 className={styles.title}>Search Countries</h2>
       <form
         onSubmit={(e) => {
           handleSubmit(e);
         }}
       >
         <input
+          className={styles.searcher}
+          placeholder="Search Countries"
           type="text"
           name="country"
           value={country}
@@ -32,9 +33,9 @@ export function Searcher(props) {
             handleSubmit(e);
           }}
           type="submit"
-          className={styles.button}
+          className={styles.buttonSearch}
         >
-          Search
+          <p className={styles.searcherP}>Search</p>
         </button>
       </form>
     </div>

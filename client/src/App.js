@@ -12,12 +12,14 @@ import CountryDetails from "./components/CountryDetails";
 function App() {
   return (
     <div className="App">
-      <h1>Henry Countries</h1>
+      <div className="flex">
+        <h1>Henry Countries</h1>
+        <Switch>
+          <Route path="/countries" component={Nav}></Route>
+          <Route path="/activities" component={Nav}></Route>
+        </Switch>
+      </div>
 
-      <Switch>
-        <Route path="/countries" component={Nav}></Route>
-        <Route path="/activities" component={Nav}></Route>
-      </Switch>
       <Route exact path="/" component={Start}></Route>
       <Route exact path="/countries" component={Filters}></Route>
       <Route exact path="/countries" component={Searcher}></Route>

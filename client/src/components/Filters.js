@@ -188,7 +188,7 @@ export function Filters(props) {
         <div className={!displays.act && !displays.cont ? styles.hide : ""}>
           <label>
             <span className={styles.spanText}>
-              <p>By name:</p>
+              <p className={styles.spanText}>By name:</p>
             </span>
           </label>
           <input
@@ -199,8 +199,8 @@ export function Filters(props) {
             onChange={handleOnChange}
           ></input>
           <label>
-            <span className={styles.spanText}>
-              <p>By population:</p>
+            <span>
+              <p className={styles.spanText}>By population:</p>
             </span>
           </label>
           <input
@@ -212,7 +212,9 @@ export function Filters(props) {
           ></input>
         </div>
         <div className={!displays.act && !displays.cont ? styles.hide : ""}>
-          <label>Asc :</label>
+          <label>
+            <p className={styles.spanText}>Asc :</p>
+          </label>
           <input
             type="radio"
             checked={filters.order === "ASC"}
@@ -220,7 +222,9 @@ export function Filters(props) {
             name="order"
             onChange={handleOnChange}
           ></input>
-          <label>Desc :</label>
+          <label>
+            <p className={styles.spanText}>Desc :</p>
+          </label>
           <input
             type="radio"
             checked={filters.order === "DESC"}
@@ -231,21 +235,30 @@ export function Filters(props) {
         </div>
         <div className={!displays.act && !displays.cont ? styles.hide : ""}>
           <button
+            className={styles.button}
             type="submit"
             onSubmit={(e) => {
               handleSubmit(e);
             }}
           >
-            Search{" "}
+            <p className={styles.p}>Search</p>{" "}
           </button>
         </div>
       </form>
       <div className={!displays.act && !displays.cont ? styles.hide : ""}>
-        <button type="button" onClick={handleLeftPage}>
-          {"<"}
+        <button
+          className={styles.buttonPage}
+          type="button"
+          onClick={handleLeftPage}
+        >
+          <p className={styles.p}> {"<"}</p>
         </button>
-        <button type="button" onClick={handleRightPage}>
-          {">"}
+        <button
+          className={styles.buttonPage}
+          type="button"
+          onClick={handleRightPage}
+        >
+          <p className={styles.p}>{">"}</p>
         </button>
       </div>
     </div>

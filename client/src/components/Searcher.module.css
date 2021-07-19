@@ -1,17 +1,27 @@
-@import url("https://fonts.googleapis.com/css2?family=Lato&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@700&family=Syne:wght@500&display=swap");
 .container {
   margin: 10px;
 }
-.title {
-  font-family: "Lato", "sans-serif";
-  color: #353535;
-}
 
-.button {
-  background: #d9d9d9;
-  font-family: "Lato", "sans-serif";
+.buttonSearch {
+  background: #ffc400;
+  border: #ffc400;
+  border-radius: 20px;
+  font-family: "Inter", "sans-serif";
+  font-size: 10px;
 }
 
 .buttonP {
   height: 100%;
+}
+
+.searcher {
+  border-radius: 20px;
+  height: 20px;
+  margin-bottom: 30px;
+}
+
+.searcherP {
+  font-family: "Inter", "sans-serif";
+  color: #22318f;
 }

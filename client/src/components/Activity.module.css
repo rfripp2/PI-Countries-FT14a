@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400&family=Syne:wght@500&display=swap");
+
 p.danger {
   color: red;
   font-size: 10px;
@@ -9,4 +11,18 @@ input.danger {
 
 .label {
   size: 200px;
+}
+
+p {
+  font-family: "Inter", "sans-serif";
+  color: #22318f;
+}
+
+.button {
+  background: #ffc400;
+  border: #ffc400;
+  border-radius: 10px;
+  font-family: "Inter", "sans-serif";
+  font-size: 10px;
+  margin-top: 20px;
 }

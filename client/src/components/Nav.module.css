@@ -1,8 +1,13 @@
 @import url("https://fonts.googleapis.com/css2?family=Lato&display=swap");
+
+.nav {
+  float: right;
+}
+
 .link {
   font-family: "Lato", "sans-serif";
   text-decoration: none;
-  color: #353535;
+  color: #22318f;
 }
 
 .removeUlStyles {
@@ -13,4 +18,8 @@
   display: inline-block;
   padding-left: 20px;
   padding-right: 20px;
+}
+
+.h3 {
+  color: #22318f;
 }

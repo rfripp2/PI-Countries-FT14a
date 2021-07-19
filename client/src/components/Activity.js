@@ -2,25 +2,7 @@ import React, { useState } from "react";
 import styles from "./Activity.module.css";
 import { connect } from "react-redux";
 import { postActivity } from "../actions/actions";
-function validate(input) {
-  let errors = {};
-  if (!input.name || input.name === "" || typeof input.name === "number") {
-    errors.name = "Name is required and must be characters";
-  } else if (
-    !input.dificulty ||
-    input.dificulty === "" ||
-    input.dificulty > 5 ||
-    input.dificulty < 1
-  ) {
-    errors.dificulty =
-      "Dificulty is required and must be a number between 1 and 5";
-  } else if (!input.duration || input.duration === "") {
-    errors.duration = "Duration is required and must be a number";
-  } else if (!input.season || input.season === "") {
-    errors.season = "Season is required";
-  }
-  return errors;
-}
+import { validate } from "../utils/Activity-utils";
 
 export function Activity(props) {
   const [values, setValues] = useState({
@@ -68,13 +50,11 @@ export function Activity(props) {
     });
   }
   return (
-    <div>
+    <div className={styles.container}>
       <h1>Post Activity</h1>
       <form type="submit" onSubmit={handleSubmit}>
-        <label>
-          <p>Name</p>
-        </label>
         <input
+          placeholder="Name"
           className={errors.hasOwnProperty("name") ? styles.danger : undefined}
           type="text"
           name="name"
@@ -82,10 +62,9 @@ export function Activity(props) {
           onChange={handleOnChange}
         ></input>
         <div>{errors.name}</div>
-        <label>
-          <p>Dificulty: 1-5</p>{" "}
-        </label>
+
         <input
+          placeholder="Dificuty : 1-5"
           className={
             errors.hasOwnProperty("dificulty") ? styles.danger : undefined
           }
@@ -95,10 +74,9 @@ export function Activity(props) {
           onChange={handleOnChange}
         ></input>
         <div>{errors.dificulty}</div>
-        <label>
-          <p>Duration:</p>{" "}
-        </label>
+
         <input
+          placeholder="Duration"
           className={
             errors.hasOwnProperty("duration") ? styles.danger : undefined
           }
@@ -108,10 +86,9 @@ export function Activity(props) {
           onChange={handleOnChange}
         ></input>
         <div>{errors.duration}</div>
-        <label>
-          <p>Season:</p>{" "}
-        </label>
+
         <input
+          placeholder="Season"
           className={
             errors.hasOwnProperty("season") ? styles.danger : undefined
           }
@@ -121,11 +98,12 @@ export function Activity(props) {
           onChange={handleOnChange}
         ></input>
         <div>{errors.season}</div>
-        <label>
-          <p>Country:</p>{" "}
-        </label>
-        <div>To add it to more than onecountry,do: Argentina,Brazil,...</div>
+
+        <div>
+          <p>To add it to more than onecountry,do: Argentina,Brazil,...</p>
+        </div>
         <input
+          placeholder="Countries"
           className={
             errors.hasOwnProperty("country") ? styles.danger : undefined
           }
@@ -137,6 +115,7 @@ export function Activity(props) {
 
         <div>{errors.country}</div>
         <button
+          className={styles.button}
           type="submit"
           disabled={
             values.name.length < 1 ||
@@ -147,7 +126,7 @@ export function Activity(props) {
             Object.keys(errors).length
           }
         >
-          Add
+          <p>Add</p>
         </button>
       </form>
     </div>

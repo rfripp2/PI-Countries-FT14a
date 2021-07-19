@@ -1,28 +1,67 @@
-@import url("https://fonts.googleapis.com/css2?family=Lato&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400&family=Syne:wght@500&display=swap");
 
 .hide {
   display: none;
 }
 
 .activated {
-  background-color: #284b63;
+  margin-top: 30px;
+  background-color: #2253ce;
   color: #ffffff;
   height: 30px;
-  font-family: "Lato", "sans-serif";
+  font-family: "Inter", "sans-serif";
+  border: #ffffff;
+  border-radius: 20px;
+  margin-top: 20px;
+  margin-right: 10px;
+  font-size: 20px;
+  padding-left: 15px;
+  padding-right: 15px;
 }
 
 .buttonDefault {
   height: 30px;
-  font-family: "Lato", "sans-serif";
-  /* margin: 7px 0 7px; */
+  border-radius: 20px;
+  font-family: "Inter", "sans-serif";
+  border: 1px solid #d2d2d2;
+  margin-top: 20px;
+  margin-right: 10px;
+  font-size: 20px;
+  padding-left: 15px;
+  padding-right: 15px;
 }
 
 .spanText {
-  font-family: "Lato", "sans-serif";
+  font-family: "Inter", "sans-serif";
+  color: #22318f;
   display: inline-block;
   padding: 0 5px 0;
 }
 
 .label {
   padding: 10px;
+}
+
+.button {
+  background-color: #ffc400;
+  border: #ffc400;
+  border-radius: 20px;
+  margin-bottom: 20px;
+  font-size: 12px;
+}
+
+.p {
+  color: #22318f;
+  font-family: "Inter", "sans-serif";
+  font-size: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.buttonPage {
+  background-color: #ffc400;
+  border: #ffc400;
+  border-radius: 20px;
+  margin-bottom: 20px;
+  font-size: 7px;
 }

@@ -1,5 +1,19 @@
+@import url("https://fonts.googleapis.com/css2?family=Syne:wght@600&display=swap");
+
+.flex {
+  display: flex;
+  justify-content: space-around;
+  background-color: #d2d2d2;
+}
+
+h1 {
+  font-family: "Syne", sans-serif;
+  color: #22318f;
+}
+
 .App {
   text-align: center;
+  background-color: #f2eeef;
 }
 
 .App-logo {

@@ -7,10 +7,10 @@ export function ActivityContainer({ name, dificulty, duration, season }) {
   return (
     <div className={styles.container}>
       {console.log(name)}
-      <h3>{name}</h3>
-      <h3>Dificulty: {dificulty}</h3>
-      <h3>Duration: {duration}</h3>
-      <h3>Season: {season}</h3>
+      <h3 className={styles.name}>{name}</h3>
+      <h3 className={styles.secondary}>Dificulty: {dificulty}</h3>
+      <h3 className={styles.secondary}>Duration: {duration}</h3>
+      <h3 className={styles.secondary}>Season: {season}</h3>
     </div>
   );
 }

@@ -1,14 +1,22 @@
-@import url("https://fonts.googleapis.com/css2?family=Lato&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400&family=Syne:wght@600&display=swap");
 
-h3,
-h2 {
-  font-family: "Lato", "sans-serif";
-  text-decoration: none;
-  color: #000411;
+.img {
+  margin-top: 40px;
+}
+.name {
+  font-family: "Syne", "sans-serif";
+  font-size: 40px;
+  color: #22318f;
+}
+
+.secondary {
+  font-family: "Inter", "sans-serif";
+  font-size: 25px;
+  color: #22318f;
 }
 
 img {
-  width: 500px;
+  width: 300px;
 }
 
 .flex {
