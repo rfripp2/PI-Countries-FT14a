@@ -11,7 +11,6 @@ export function CountryDetails(props) {
   const {
     name,
     flag,
-    ID,
     continent,
     capital,
     subregion,
@@ -24,7 +23,7 @@ export function CountryDetails(props) {
     <div>
       <h2 className={styles.texts}>{name}</h2>
       <h3>{continent}</h3>
-      <img src={flag}></img>
+      <img alt={`${name} flag`} src={flag}></img>
       <h3>Capital: {capital}</h3>
       <h3>Subregion: {subregion}</h3>
       <h3>Area: {area}</h3>
@@ -34,6 +33,7 @@ export function CountryDetails(props) {
           activities.map((x) => {
             return (
               <ActivityContainer
+                key={x.name}
                 name={x.name}
                 dificulty={x.dificulty}
                 duration={x.duration}

@@ -86,7 +86,9 @@ export function Activity(props) {
           <p>Dificulty: 1-5</p>{" "}
         </label>
         <input
-          className={errors.hasOwnProperty("dificulty") && styles.danger}
+          className={
+            errors.hasOwnProperty("dificulty") ? styles.danger : undefined
+          }
           type="number"
           name="dificulty"
           value={props.dificulty}

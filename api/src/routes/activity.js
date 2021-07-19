@@ -30,7 +30,7 @@ router.post("/", async (req, res) => {
         await countryFound.addActivity(activityCreated);
         return res.status(201).json(activityCreated);
       } else {
-        res.json({
+        return res.json({
           message:
             "Activity was created but likely countries werent added correctly",
         });

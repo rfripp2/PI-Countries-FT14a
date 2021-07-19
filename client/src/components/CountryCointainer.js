@@ -5,7 +5,7 @@ export function CountryCointainer({ name, continent, flag, ID }) {
   return (
     <div className={styles.container}>
       <ul className={styles.removeUlStyles}>
-        <li>
+        <li key={name}>
           <Link className={styles.link} to={`/countries/${ID}`}>
             <h3 className={styles.name}>{name}</h3>
           </Link>

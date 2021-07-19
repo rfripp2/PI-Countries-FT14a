@@ -73,7 +73,7 @@ export function filteredActivities(activity, orderBy, order, page, limit) {
 }
 
 export function postActivity(obj) {
-  obj.country = obj.country.split(" ");
+  obj.country = obj.country.split(",");
   return function (dispatch) {
     axios
       .post("http://localhost:3001/activity", obj)

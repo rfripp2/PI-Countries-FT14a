@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import { NavLink } from "react-router-dom";
 import { connect } from "react-redux";
 import { getActivities, getInitialCountries } from "../actions/actions";
 import { CountryCointainer } from "./CountryCointainer";

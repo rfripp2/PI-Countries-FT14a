@@ -4,7 +4,7 @@ const fs = require("fs");
 const axios = require("axios").default;
 const path = require("path");
 const { DB_USER, DB_PASSWORD, DB_HOST } = process.env;
-
+const { createCountries } = require("./countriesList");
 const sequelize = new Sequelize(
   `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/countries`,
   {
@@ -36,35 +36,10 @@ let capsEntries = entries.map((entry) => [
 ]);
 sequelize.models = Object.fromEntries(capsEntries);
 
-function createCountries() {
-  let countryList;
-  return axios
-    .get("https://restcountries.eu/rest/v2/all")
-    .then((response) => {
-      countryList = response.data.map((x) => {
-        return {
-          ID: x.alpha3Code,
-          name: x.name,
-          continent: x.region,
-          capital: x.capital,
-          subregion: x.subregion,
-          area: x.area,
-          population: x.population,
-          flag: x.flag,
-        };
-      });
-      return countryList;
-    })
-    .then((countryList) => {
-      return Country.bulkCreate(countryList);
-    });
-}
-
-createCountries();
-
 // En sequelize.models están todos los modelos importados como propiedades
 // Para relacionarlos hacemos un destructuring
 const { Country, Activity } = sequelize.models;
+createCountries(Country);
 
 // Aca vendrian las relaciones
 Country.belongsToMany(Activity, { through: "Country_Activity" });
