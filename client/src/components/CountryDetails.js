@@ -9,6 +9,7 @@ export function CountryDetails(props) {
   }, []);
 
   const {
+    ID,
     name,
     flag,
     continent,
@@ -27,8 +28,9 @@ export function CountryDetails(props) {
 
       <h3 className={styles.secondary}>Capital: {capital}</h3>
       <h3 className={styles.secondary}>Subregion: {subregion}</h3>
-      <h3 className={styles.secondary}>Area: {area}</h3>
+      <h3 className={styles.secondary}>Area: {area} km2</h3>
       <h3 className={styles.secondary}>Population: {population}</h3>
+      <h3 className={styles.secondary}>Code: {ID}</h3>
       <div className={styles.flex}>
         {activities ? (
           activities.map((x) => {
