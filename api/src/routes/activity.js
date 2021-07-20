@@ -25,16 +25,16 @@ router.post("/", async (req, res) => {
           },
         },
       });
-      if (countryFound) {
-        await activityCreated.setCountries(countryFound);
-        await countryFound.addActivity(activityCreated);
-        return res.status(201).json(activityCreated);
-      } else {
+      if (countryFound === null) {
         return res.json({
           message:
             "Activity was created but likely countries werent added correctly",
         });
+      } else {
+        await activityCreated.setCountries(countryFound);
+        await countryFound.addActivity(activityCreated);
       }
+      return res.status(201).json(activityCreated);
     });
   } catch (error) {
     res.sendStatus(500);

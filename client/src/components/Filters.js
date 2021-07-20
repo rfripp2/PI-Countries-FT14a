@@ -50,7 +50,7 @@ export function Filters(props) {
 
   function handleSubmit(e) {
     e.preventDefault();
-    console.log(filters);
+    //console.log(filters);
     page = 1;
     if (continent && continent !== "" && displays.cont) {
       console.log("here?");
@@ -76,6 +76,7 @@ export function Filters(props) {
   }
 
   function handleLeftPage(e) {
+    e.preventDefault();
     if (offset !== 0) {
       offset -= 10;
       page--;
@@ -85,23 +86,16 @@ export function Filters(props) {
         page,
       });
     }
-    e.preventDefault();
     if (continent && continent !== "" && displays.cont) {
-      e.preventDefault();
-      props.filteredCountries(continent, orderBy, order, page, offset);
+      return props.filteredCountries(continent, orderBy, order, page, offset);
     }
     if (activity && activity !== "" && displays.act) {
-      e.preventDefault();
-      props.filteredActivities(activity, orderBy, order, page, 10);
+      return props.filteredActivities(activity, orderBy, order, page, 10);
     }
   }
 
   function handleRightPage(e) {
-    /*   let nextPage = page + 1;
-    {
-      console.log(page, nextPage);
-    } */
-
+    e.preventDefault();
     if (page * 10 < props.total) {
       offset += 10;
       page++;
@@ -112,12 +106,10 @@ export function Filters(props) {
       });
 
       if (continent && continent !== "" && displays.cont) {
-        e.preventDefault();
-        props.filteredCountries(continent, orderBy, order, page, offset);
+        return props.filteredCountries(continent, orderBy, order, page, offset);
       }
       if (activity && activity !== "" && displays.act) {
-        e.preventDefault();
-        props.filteredActivities(activity, orderBy, order, page, 10);
+        return props.filteredActivities(activity, orderBy, order, page, 10);
       }
     }
   }

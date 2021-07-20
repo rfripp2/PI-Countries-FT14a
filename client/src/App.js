@@ -9,11 +9,15 @@ import Filters from "./components/Filters";
 import Nav from "./components/Nav";
 import Activity from "./components/Activity";
 import CountryDetails from "./components/CountryDetails";
+import { NavLink } from "react-router-dom";
 function App() {
   return (
     <div className="App">
       <div className="flex">
-        <h1>Henry Countries</h1>
+        <NavLink to="/">
+          <h1>Henry Countries</h1>
+        </NavLink>
+
         <Switch>
           <Route path="/countries" component={Nav}></Route>
           <Route path="/activities" component={Nav}></Route>
